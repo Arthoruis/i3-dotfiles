@@ -102,7 +102,7 @@ alias up='sudo pacman -Syyu --noconfirm'
 alias dn='sudo pacman -S --noconfirm'
 alias mo="udisksctl mount -b"
 alias umo="udisksctl unmount -b"
-alias moveracrypt="veracrypt /run/media/arthorius/ps4/BACKUP\ ARTHUR/System /mnt/veracrypt1/" # Mount encrypted Backup
+alias moveracrypt="veracrypt /dev/sdx /mnt/veracrypt1/" # Mount encrypted Backup
 alias umoveracrypt="veracrypt -d" # Unmount all veracrypt mounted devices
 
 shopt -s autocd #Allows you to cd into direcotory merely by typing the directory name.
