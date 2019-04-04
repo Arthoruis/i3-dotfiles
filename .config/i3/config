@@ -52,40 +52,48 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Return exec i3-sensible-terminal
 
 # Autostart applications
-#exec --no-startup-id sleep 1; compton -b	# Compton for transparency on terminal
+exec --no-startup-id conky -q -c $HOME/.config/conky/conky.conf 	# Conky i3 information
+exec --no-startup-id conky -q -c $HOME/.config/conky/conky2.conf	# Conky system information
+exec --no-startup-id sleep 1; compton -b	# Compton for transparency on terminal
 exec --no-startup-id nitrogen --restore		# Nitrogen for wallpapers
-exec --no-startup-id xset b off			# Tab buzzer off
+exec --no-startup-id xset b off; alsactl restore	# Tab buzzer off
+exec --no-startup-id xset -dpms; xset s off
 exec --no-startup-id dunst			# Dunst for notification
-#exec --no-startup-id volumeicon
-#exec --no-startup-id blueberry-tray		# Bluetooth tray
+exec --no-startup-id volumeicon
+exec --no-startup-id blueberry-tray		# Bluetooth tray
 exec --no-startup-id clipit			# Clipit for history copy/paste
 exec --no-startup-id nm-applet			# Network Manager applet
 #exec --no-startup-id desktop-items
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-exec --no-startup-id batterymon			# Battery applet
-exec_always --no-startup-id sbxkb		# Show keyboard Layout
+exec --no-startup-id batterymon		# Battery applet
+exec --no-startup-id sbxkb			# Show keyboard Layout
 #exec --no-startup-id pamac-tray		# Pamac update system if installed
 
 # Start application
 bindsym $mod+F1         exec palemoon
 bindsym $mod+Shift+F1   exec palemoon --private-window
+bindsym $mod+Alt+F1	exec tor-browser-pt-br
 bindsym $mod+F2         exec nitrogen
-#bindsym $mod+F3        exec pcmanfm
-#bindsym $mod+Shift+F3  exec gksu pcmanfm
-bindsym $mod+F3         exec nemo
-bindsym $mod+Shift+F3   exec sudo nemo
-bindsym $mod+F4         exec ranger
+bindsym $mod+F3	        exec pcmanfm
+bindsym $mod+Shift+F3	exec gksu pcmanfm
+bindsym $mod+F4         exec i3-sensible-terminal -e 'ranger'
 bindsym $mod+F5         exec font-manager
 bindsym $mod+F6         exec i3-sensible-terminal -e 'cmus'
-bindsym $mod+F7         exec spotify
+bindsym $mod+F7         exec pavucontrol
+bindsym $mod+Shift+F7	exec pulseeffects
+bindsym 4mod+Ctrl+F7	exec pulseaudio-equalizer-gtk
+bindsym $mod+F8		exec i3-sensible-terminal -e 'pulsemixer'
+bindsym $mod+Ctrl+F8	exec i3-sensible-terminal -e 'alsamixer'
 bindsym $mod+F9         exec i3-sensible-terminal -e 'htop'
 bindsym $mod+t          exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t     exec --no-startup-id compton -b
+bindsym $mod+p		exec alsactl restore			# Restore audio
+bindsym $mod+Ctrl+p	exec sudo systemctl restart NetworkManager
 
 # Screenshot
-bindsym --release Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/Screenshot/screenshot-$(date +%d-%m-%Y_%H-%M-%S).png"
-bindsym --release Shift+Print exec --no-startup-id "maim -s -p - -c 0.95,0.5,0.09 $HOME/Pictures/Screenshot/screenshot-$(date +%d-%m-%Y_%H-%M-%S0.png"
+bindsym --release Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/Screen-Capture/screenshot-$(date +%d-%m-%Y_%H-%M-%S).png"
+bindsym --release $mod+Print exec --no-startup-id "maim --hidecursor -s  $HOME/Pictures/Screen-Capture/screenshot-$(date +%d-%m-%Y_%H-%M-%S).png"
 
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws1
@@ -93,10 +101,10 @@ bindsym --release Shift+Print exec --no-startup-id "maim -s -p - -c 0.95,0.5,0.0
 # etc...
 
 assign [class="Pale moon"] $ws2
-assign [class="Spotify"] $ws3
+#assign [class="Spotify"] $ws3
 assign [class="Whatsie"] $ws4
 assign [title="Telegram"] $ws5
-assign [title="pcmanfm"] $ws6
+#assign [title="pcmanfm"] $ws6
 #assign [class="Veracrypt"] $ws7
 #assign [title="htop"] $ws9
 
@@ -146,8 +154,6 @@ bindsym $mod+d exec --no-startup-id rofi -show run  #using rofi
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec i3-sensible-terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
@@ -177,8 +183,10 @@ bindsym XF86TouchpadOff      	exec --no-startup-id synclient TouchpadOff=1
 bindsym XF86AudioMedia       	exec --no-startup-id spotify
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp     exec light -k -A 10;exec notify-send 'brightness up'
-bindsym XF86MonBrightnessDown   exec light -k -U 10;exec notify-send 'brightness down'
+#bindsym XF86MonBrightnessUp     exec light -k -A 10;exec notify-send 'brightness up'
+#bindsym XF86MonBrightnessDown   exec light -k -U 10;exec notify-send 'brightness down'
+bindsym XF86MonBrightnessUp 	exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown	exec xbacklight -dec 10
 
 # Other controls
 # bindsym XF86Copy
@@ -425,11 +433,11 @@ bar {
         strip_workspace_numbers yes
 #	separator <
 colors {
-        background #454545
+        background #1b1a1a
         statusline #ffffff
-        separator #000000
+        separator #454545
 
-        focused_workspace  #ecedee #ecedee #454545
+        focused_workspace  #282727 #ecedee #454545
         active_workspace   #ecedee #ecedee #454545
         inactive_workspace #454545 #454545 #ffffff
         urgent_workspace   #454545 #454545 #ffffff
