@@ -64,9 +64,7 @@ get_session(){
 }
 
 exec $(get_session)
-exec xset b off		# Disable bell
+exec xset b off		# Disable tab bell
 exec xset -dpms		# Disable turn off screen
 exec xset s off		# Disable turn off screen
 exec startx
-# Keyboard Layout
-exec set setxkbmap -layout us,br -option grp:alt_space_toggle
