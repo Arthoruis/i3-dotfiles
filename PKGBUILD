@@ -2,7 +2,7 @@
 pkgname=my-package-dependecies-for-i3
 pkgver=20190330
 pkgrel=1
-pkgdesc='All the packages needed to run my minimal Arch Linux.'
+pkgdesc='All packages needed to run my minimal Arch Linux.'
 arch=('any')
 license=('custom:Public Domain')
 depends=('adobe-source-code-pro-fonts'
@@ -43,6 +43,7 @@ depends=('adobe-source-code-pro-fonts'
 	 'network-manager-applet'
 	 'baobab'
 	 'conky'
+         'ntp'
 	 'acpi'
 	 'xf86-video-ati'
 	 'xf86-video-nouveau'
