@@ -90,20 +90,24 @@ fi
 
 unset use_color safe_term match_lhs sh
 
-alias cp="cp -iv"                         # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
+alias r="ranger"
+alias cp="cp -rfv"                        
+Alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias mv="mv -v"
 alias rm="rm -rfv"
 alias np='vim -w PKGBUILD'
 alias more=less
 alias l='ls -al'
-alias up='sudo pacman -Syyu --noconfirm'
-alias dn='sudo pacman -S --noconfirm'
+alias up='sudo pacman -Syyu --noconfirm'	# Update everything without asking permition
+alias dn='sudo pacman -S --noconfirm'		# Install package without asking permition
 alias mo="udisksctl mount -b"
 alias umo="udisksctl unmount -b"
-alias moveracrypt="veracrypt /dev/sdx /mnt/veracrypt1/" # Mount encrypted Backup
-alias umoveracrypt="veracrypt -d" # Unmount all veracrypt mounted devices
+#alias moveracrypt="veracrypt /dev/sdx /mnt/veracrypt1/" # Mount encrypted Backup
+#alias umoveracrypt="veracrypt -d" # Unmount all veracrypt mounted devices
+alias luksOpen="sudo cryptsetup luksOpen"
+alias luksClose="sudo cryptsetup luksClose"
+alias qemu-usb-emulator="sudo qemu-system-x86_64 -machine accel=kvm:tcg -m 512 -usb -device usb-tablet -hda" # Emulate a hdd/usb system
 
 shopt -s autocd #Allows you to cd into direcotory merely by typing the directory name.
 
@@ -148,6 +152,3 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-
-# better yay colors
-export YAY_COLORS="nb=1:pkg=1:ver=1;32:lver=1:45:installed=1:42:grp=1;34:od=1;41;5:votes=1;41;5:votes:dsc=0:other=1;35"
