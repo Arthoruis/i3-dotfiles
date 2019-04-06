@@ -1,0 +1,32 @@
+Band:  
+Song:  
+Album: 
+
+Copyright (band)
+Made by = Arthur de Oliveira - Brazil
+Email: Arthcomicando@gmail.com
+
+
+.  - palm mute           /  - slide up to
+\  - slide down to       ~  - vibrato
+h  - hammer on           b  - Bend
+p  - pull off            Suffixes for bend
+t  - tap                 f  - full bend    h - half bend
+ph - pinched harmonic    q  - quarter bend t - tap bend
+*  - see comment         ^  - Hold bend    r release bend
+x  - Stuccatto           ~  - vibrato bend
+,  - slight palm mute    () - ghost note, sustained note
+"  - tremolo note        <> - harmonic
+pb - pre bend
+
+
+Tuning Eb Ab Db Gb Bb Eb
+
+|Eb|----------------------------------------
+|Bb|----------------------------------------
+|Gb|----------------------------------------
+|Db|----------------------------------------
+|Ab|----------------------------------------
+|Eb|----------------------------------------
+
+Intro Solo & Verse
