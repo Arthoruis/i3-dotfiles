@@ -6,7 +6,7 @@ IFS=$'\n'
 # If the option `use_preview_script` is set to `true`,
 # then this script will be called and its output will be displayed in ranger.
 # ANSI color codes are supported.
-# STDIN is disabled, so interactive scripts won't work properly
+# STDIN is disabled, so interactive scripts won't work properly.
 
 # This script is considered a configuration file and must be updated manually.
 # It will be left untouched if you upgrade ranger.
