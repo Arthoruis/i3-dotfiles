@@ -483,6 +483,8 @@ mode "$mode_system" {
 ## i3bar configuration ##
 #########################
 
+bindsym $mod+m bar mode toggle		# Hide/unhide i3status bar
+
 bar {
 	tray_output primary
         status_command i3status -c ~/.config/i3/i3status/config
@@ -500,5 +502,3 @@ colors {
         urgent_workspace   #454545 #454545 #ffffff
     }
 }
-
-bindsym $mod+m bar mode toggle		# Hide/unhide i3status bar
