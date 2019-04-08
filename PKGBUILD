@@ -5,6 +5,8 @@ pkgrel=1
 pkgdesc='All packages needed to run my minimal Arch Linux.'
 arch=('any')
 license=('custom:Public Domain')
+checkdepends=()
+install=()
 depends=('adobe-source-code-pro-fonts'
 	 'adobe-source-sans-pro-fonts'
 	 'adobe-source-serif-pro-fonts'
@@ -86,5 +88,4 @@ depends=('adobe-source-code-pro-fonts'
 	 'udiskie'
 	 'vlc'
 	 'youtube-dl'
-	 'yay'
-)
+	 'yay')
