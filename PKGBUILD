@@ -88,4 +88,5 @@ depends=('adobe-source-code-pro-fonts'
 	 'udiskie'
 	 'vlc'
 	 'youtube-dl'
-	 'yay')
+	 'yay'
+)
