@@ -92,7 +92,7 @@ unset use_color safe_term match_lhs sh
 
 alias r="ranger"
 alias cp="cp -rfv"                        
-Alias df='df -h'                          # human-readable sizes
+alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias mv="mv -v"
 alias rm="rm -rfv"
