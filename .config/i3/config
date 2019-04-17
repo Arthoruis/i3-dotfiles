@@ -71,6 +71,7 @@ exec --no-startup-id nm-applet							# Network Manager applet
 exec --no-startup-id batterymon							# Battery applet
 exec --no-startup-id sbxkb							# Show keyboard current layout
 #exec --no-startup-id pamac-tray						# Pamac update system if installed
+exec --no-startup-id $HOME/.bash-scripts/gufw-tray.sh
 
 # Start application
 bindsym $mod+F1         exec firefox-esr
@@ -126,6 +127,7 @@ for_window [title="About Pale Moon"] floating enable
 #for_window [class="Pavucontrol"] floating enable
 for_window [class="Qtconfig-qt4"] floating enable border normal
 for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Gufw"] floating enable
 for_window [class="(?i)blueberry"] floating enable border normal
 #for_window [class="Palemoon: Preferences"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
