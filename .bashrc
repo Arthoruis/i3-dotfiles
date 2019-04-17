@@ -107,6 +107,9 @@ alias umo="udisksctl unmount -b"
 #alias umoveracrypt="veracrypt -d" # Unmount all veracrypt mounted devices
 alias luksCrypt="$HOME/.bash-scripts/luks.sh"
 alias qemu-usb-emulator="sudo qemu-system-x86_64 -machine accel=kvm:tcg -m 512 -usb -device usb-tablet -hda" # Emulate a hdd/usb system
+alias virus="clamscan -ior --bell --log=$HOME/Clamscan/clamscan-log-$(date +%d-%m-%Y_%H-%M-%S).txt"
+alias virus-copy="clamscan -ior --bell --log=$HOME/Clamscan/clamscan-log-$(date +%d-%m-%Y_%H-%M-%S).txt --copy=$HOME/Clamscan/"
+alias virus-move="clamscan -ior --bell --log=$HOME/Clamscan/clamscan-log-$(date +%d-%m-%Y_%H-%M-%S).txt --move=$HOME/Clamscan/"
 
 shopt -s autocd #Allows you to cd into direcotory merely by typing the directory name.
 
