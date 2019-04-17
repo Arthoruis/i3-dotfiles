@@ -5,8 +5,8 @@
 
 # Replace YOUR_USERNAME_HERE and YOUR_PASSWORD_HERE with your RuTracker username and password
 credentials = {
-    'login_username': u'Arthorius_Alfa',
-    'login_password': u'zJSal',
+    'login_username': u'YOUR_USERNAME',
+    'login_password': u'YOUR_PASSWORD',
 }
 
 # List of RuTracker mirrors
