@@ -42,7 +42,6 @@ bindsym $mod+u border none
 bindsym $mod+y boder pixel 1
 bindsym $mod+n border normal 
 
-
 ####################
 ## Start programs ##
 ####################
@@ -74,11 +73,11 @@ exec --no-startup-id sbxkb							# Show keyboard current layout
 exec --no-startup-id $HOME/.bash-scripts/gufw-tray.sh
 
 # Start application
-bindsym $mod+F1         exec firefox-esr
-bindsym $mod+Shift+F1   exec firefox-esr --private-window
+bindsym $mod+F1         exec firefox
+bindsym $mod+Ctrl+F1    exec firefox --private-window
 bindsym $mod+F2         exec nitrogen
 bindsym $mod+F3	        exec pcmanfm
-bindsym $mod+Shift+F3	exec gksu pcmanfm
+bindsym $mod+Ctrl+F3	exec gksu pcmanfm
 bindsym $mod+F4         exec i3-sensible-terminal -e 'ranger'
 bindsym $mod+F5         exec font-manager
 bindsym $mod+F6         exec i3-sensible-terminal -e 'cmus'
@@ -192,7 +191,6 @@ bindsym XF86AudioMedia       		exec --no-startup-id spotify
 #bindsym XF86MonBrightnessDown		exec xbacklight -dec 10
 bindsym $mod+F12			exec xbacklight -inc 10
 bindsym $mod+F11			exec xbacklight -dec 10
-
 
 # Other controls
 # bindsym XF86Copy
@@ -357,47 +355,12 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-#########################################
-## i3 exit; restart config; lockscreen ##
-#########################################
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# Locker configuration
-set $Locker betterlockscreen -l blur
-
-# Set shut down, restart and locking features
-
-set $mode_system (l)lock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (p)ower-off, (b) off-screen
-
-bindsym $mod+Shift+e mode "$mode_system"
-
-mode "$mode_system" {
-    bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/screen-locker/lock.sh
-    bindsym e mode "default", exec --no-startup-id i3-msg exit
-    bindsym s mode "default", exec --no-startup-id systemctl suspend
-    bindsym h mode "deafult", exec --no-startup-id systemctl hibernate
-    bindsym r mode "default", exec --no-startup-id systemctl reboot
-    bindsym p mode "default", exec --no-startup-id systemctl poweroff
-    bindsym b mode "default", exec --no-startup-id sleep 1 && xset dpms force off
-
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 ###################
 ## Resize window ##
 ###################
 
-# resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize" # resize window (you can also use the mouse for that)
+
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -421,33 +384,6 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
-bindsym $mod+r mode "resize"
-
-#########################
-## i3bar configuration ##
-#########################
-
-bar {
-	tray_output primary
-        #status_command i3status -c ~/.config/i3/i3status/config
-        status_command i3blocks
-        position bottom
-        font pango:open sans 8
-        strip_workspace_numbers yes
-colors {
-        background #1b1a1a
-        statusline #ffffff
-        separator #454545
-
-        focused_workspace  #282727 #ecedee #454545
-        active_workspace   #ecedee #ecedee #454545
-        inactive_workspace #454545 #454545 #ffffff
-        urgent_workspace   #454545 #454545 #ffffff
-    }
-}
-
-bindsym $mod+m bar mode toggle		# Hide/unhide i3status bar
 
 #############################
 ### settings for i3-gaps: ###
@@ -504,4 +440,65 @@ mode "$mode_gaps_outer" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
+}
+
+#########################################
+## i3 exit; restart config; lockscreen ##
+#########################################
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Locker configuration
+set $Locker betterlockscreen -l blur
+
+# Set shut down, restart and locking features
+
+set $mode_system (l)lock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (p)ower-off, (b) off-screen
+
+bindsym $mod+Shift+e mode "$mode_system"
+
+mode "$mode_system" {
+    bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/screen-locker/lock.sh
+    bindsym e mode "default", exec --no-startup-id i3-msg exit
+    bindsym s mode "default", exec --no-startup-id systemctl suspend
+    bindsym h mode "deafult", exec --no-startup-id systemctl hibernate
+    bindsym r mode "default", exec --no-startup-id systemctl reboot
+    bindsym p mode "default", exec --no-startup-id systemctl poweroff
+    bindsym b mode "default", exec --no-startup-id sleep 1 && xset dpms force off
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+#########################
+## i3bar configuration ##
+#########################
+
+bindsym $mod+m bar mode toggle		# Hide/unhide i3status bar
+
+bar {
+	tray_output primary
+        #status_command i3status -c ~/.config/i3/i3status/config
+        status_command i3blocks
+        position bottom
+        font pango:open sans 8
+        strip_workspace_numbers yes
+colors {
+        background #1b1a1a
+        statusline #ffffff
+        separator #454545
+
+        focused_workspace  #282727 #ecedee #454545
+        active_workspace   #ecedee #ecedee #454545
+        inactive_workspace #454545 #454545 #ffffff
+        urgent_workspace   #454545 #454545 #ffffff
+    }
 }
