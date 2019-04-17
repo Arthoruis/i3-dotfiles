@@ -1,6 +1,6 @@
+# -------------------------------------------------------------
 # Author: Arthur de Oliveira Pereira <arthcomicando@gmail.com>
 # ~/.bashrc
-#
 
 [[ $- != *i* ]] && return
 
