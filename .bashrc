@@ -105,8 +105,7 @@ alias mo="udisksctl mount -b"
 alias umo="udisksctl unmount -b"
 #alias moveracrypt="veracrypt /dev/sdx /mnt/veracrypt1/" # Mount encrypted Backup
 #alias umoveracrypt="veracrypt -d" # Unmount all veracrypt mounted devices
-alias luksOpen="sudo cryptsetup luksOpen"
-alias luksClose="sudo cryptsetup luksClose"
+alias luksCrypt="$HOME/.bash-scripts/luks.sh"
 alias qemu-usb-emulator="sudo qemu-system-x86_64 -machine accel=kvm:tcg -m 512 -usb -device usb-tablet -hda" # Emulate a hdd/usb system
 
 shopt -s autocd #Allows you to cd into direcotory merely by typing the directory name.
