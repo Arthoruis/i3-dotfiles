@@ -359,8 +359,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 ## Resize window ##
 ###################
 
-bindsym $mod+r mode "resize" # resize window (you can also use the mouse for that)
-
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -384,6 +382,8 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
+
+bindsym $mod+r mode "resize" # resize window (you can also use the mouse for that)
 
 #############################
 ### settings for i3-gaps: ###
