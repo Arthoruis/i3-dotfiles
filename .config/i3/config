@@ -87,6 +87,7 @@ bindsym $mod+Ctrl+F7	exec pulseeffects
 bindsym $mod+F8		exec i3-sensible-terminal -e 'pulsemixer'
 bindsym $mod+Ctrl+F8	exec i3-sensible-terminal -e 'alsamixer'
 bindsym $mod+F9         exec i3-sensible-terminal -e 'htop'
+bindsym $mod+Ctrl+e	exec enpass
 bindsym $mod+t          exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t     exec --no-startup-id compton -b
 bindsym $mod+p		exec alsactl restore			# Restore audio
@@ -103,7 +104,7 @@ bindsym --release $mod+Print exec --no-startup-id "maim --hidecursor -s  $HOME/P
 
 assign [class="Firefox"] $ws2
 #assign [class="Spotify"] $ws3
-assign [class="Whatsie"] $ws4
+assign [class="Rambox"] $ws4
 assign [title="Telegram"] $ws5
 #assign [title="pcmanfm"] $ws6
 #assign [class="Veracrypt"] $ws7
