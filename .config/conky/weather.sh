@@ -1,10 +1,10 @@
 #!/bin/bash
 # Based on http://openweathermap.org/current
  
-API_KEY="b2751e068adb21b093a02dea731b6fc4"
+API_KEY="xxxxxxxxxxxxxxxx"
  
 # Check on http://openweathermap.org/find
-CITY_ID="3446682"
+CITY_ID="xxxxxxxxxxxx"
 
 URGENT_LOWER=0
 URGENT_HIGHER=35
