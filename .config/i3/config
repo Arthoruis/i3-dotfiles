@@ -52,8 +52,16 @@ bindsym $mod+Shift+q kill
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# Configuring Monitor
+set $mon "DVI-I-1"
+
 # Autostart applications
 exec --no-startup-id "setxkbmap -model pc104 -layout us,br , -option grp:alt_space_toggle"
+#exec --no-startup-id sleep 2; urxvt -e $HOME/.bash-scripts/luks+dropbox.sh
+exec --no-startup-id deadd-notification-center
+exec --no-startup-id sleep 2; urxvt
+exec --no-startup-id sleep 60; dropbox
+exec --no-startup-id ulauncher
 exec --no-startup-id conky -q -c $HOME/.config/conky/conky.conf			# Conky i3 information
 exec --no-startup-id conky -q -c $HOME/.config/conky/conky2.conf		# Conky system information
 exec --no-startup-id sleep 1; compton -b					# Compton for transparency on terminal
@@ -63,14 +71,17 @@ exec --no-startup-id xset -dpms; xset s off					# Stop screen turn off
 exec --no-startup-id dunst							# Dunst for notification
 exec --no-startup-id volumeicon							# Volume icon tray
 exec --no-startup-id blueberry-tray						# Bluetooth tray
-exec --no-startup-id clipit							# Clipit for history copy/paste
+exec --no-startup-id clipman							# Clipit for history copy/paste
 exec --no-startup-id nm-applet							# Network Manager applet
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent				# Geoclue for Redshift
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-exec --no-startup-id batterymon							# Battery applet
-exec --no-startup-id sbxkb							# Show keyboard current layout
-#exec --no-startup-id pamac-tray						# Pamac update system if installed
-exec --no-startup-id $HOME/.bash-scripts/gufw-tray.sh
+#exec --no-startup-id sbxkb							# Show keyboard current layout
+exec --no-startup-id pamac-tray	 						# Pamac update system if installed
+#exec --no-startup-id minetime							# Organizar agenda
+exec --no-startup-id sudo $HOME/.bash-scripts/gufw-tray.sh
+#exec --no-startup-id sleep 5; rambox 
+#exec --no-startup-id telegram-desktop
 
 # Start application
 bindsym $mod+F1         exec firefox
@@ -84,14 +95,16 @@ bindsym $mod+F6         exec i3-sensible-terminal -e 'cmus'
 bindsym $mod+Ctrl+F6	exec i3-sensible-terminal -e 'pyradio'
 bindsym $mod+F7         exec pavucontrol
 bindsym $mod+Ctrl+F7	exec pulseeffects
+bindsym $mod+Ctrl+d	exec $HOME/Aplicativos/AppImage/Deezloader_Remix.AppImage
 bindsym $mod+F8		exec i3-sensible-terminal -e 'pulsemixer'
 bindsym $mod+Ctrl+F8	exec i3-sensible-terminal -e 'alsamixer'
 bindsym $mod+F9         exec i3-sensible-terminal -e 'htop'
 bindsym $mod+Ctrl+e	exec enpass
-bindsym $mod+t          exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t     exec --no-startup-id compton -b
+bindsym $mod+t          exec --no-startup-id pkill picom
+bindsym $mod+Ctrl+t     exec --no-startup-id picom -b
 bindsym $mod+p		exec alsactl restore			# Restore audio
 bindsym $mod+Ctrl+p	exec sudo systemctl restart NetworkManager
+bindsym $mod+Ctrl+w	exec kill -s USR1 $(pidof deadd-notification-center)
 
 # Screenshot
 bindsym --release Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/Screen-Capture/screenshot-$(date +%d-%m-%Y_%H-%M-%S).png"
@@ -102,13 +115,16 @@ bindsym --release $mod+Print exec --no-startup-id "maim --hidecursor -s  $HOME/P
 # assign [class="Pale moon"] $ws2
 # etc...
 
-assign [class="Firefox"] $ws2
-#assign [class="Spotify"] $ws3
-assign [class="Rambox"] $ws4
+assign [title="Firefox"] $ws2
+assign [class="spotify"] $ws3
+assign [class="Clementine"] $ws3
+#assign [class="whatsie"] $ws4
+assign [title="Rambox"] $ws4
 assign [title="Telegram"] $ws5
+assign [title="MineTime"] $ws8
 #assign [title="pcmanfm"] $ws6
-#assign [class="Veracrypt"] $ws7
-#assign [title="htop"] $ws9
+#assign [class="spotify"] $ws7
+
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -121,9 +137,10 @@ for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 #for_window [class="Pale moon"] fullscreen enable
+for_window [class="nitrogen"] fullscreen enable
 for_window [title="About Pale Moon"] floating enable
-#for_window [class="Pamac-manager"] floating enable
-#for_window [class="pamac-updater"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="pamac-updater"] floating enable
 #for_window [class="Pavucontrol"] floating enable
 for_window [class="Qtconfig-qt4"] floating enable border normal
 for_window [class="qt5ct"] floating enable sticky enable border normal
@@ -133,8 +150,9 @@ for_window [class="(?i)blueberry"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
+#for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Yad"] floating enable
+for_window [class="hmtimer"] floating enable 
 
 # Floating dialogs
 for_window [window_role="pop-up"] floating enable
@@ -151,7 +169,8 @@ for_window [window_role="task_dialog"] floating enable
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindsym $mod+d exec --no-startup-id rofi -show run  #using rofi
+bindsym $mod+d exec dmenu_run
+#bindsym $mod+Ctrl+d exec --no-startup-id rofi -show run  #using rofi
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -396,10 +415,10 @@ mode "resize" {
         # Pressing right will grow the window's width.
         # Pressing up will shrink the window's height.
         # Pressing down will grow the window's height.
-        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym j resize grow width 5 px or 5 ppt
         bindsym k resize grow height 5 px or 5 ppt
         bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+        bindsym semicolon resize shrink width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -413,7 +432,7 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize" # resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
 
 #############################
 ### settings for i3-gaps: ###
@@ -496,7 +515,7 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 mode "$mode_system" {
     bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/screen-locker/lock.sh
-    bindsym e mode "default", exec --no-startup-id i3-msg exit
+    bindsym e mode "default", exec --no-startup-id $HOME/.bash-scripts/exit.sh
     bindsym s mode "default", exec --no-startup-id systemctl suspend
     bindsym h mode "deafult", exec --no-startup-id systemctl hibernate
     bindsym r mode "default", exec --no-startup-id systemctl reboot
@@ -511,12 +530,18 @@ mode "$mode_system" {
 #########################
 ## i3bar configuration ##
 #########################
+#
+# For use the proper monitor you can set with xrandr: 
+# $ xrandr --output <output> --primary
+# or
+# set tray options: tray_output <output>
 
 bindsym $mod+m bar mode toggle		# Hide/unhide i3status bar
 
 bar {
-	tray_output primary
-        #status_command i3status -c ~/.config/i3/i3status/config
+	tray_output DVI-I-1
+	#tray_output primary
+	#status_command i3status -c ~/.config/i3/i3status/config
         status_command i3blocks
         position bottom
         font pango:open sans 8
