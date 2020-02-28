@@ -97,12 +97,17 @@ alias free='free -m'                      # show sizes in MB
 alias mv="mv -v"
 alias rm="rm -rfv"
 alias np='vim -w PKGBUILD'
+alias vi="vim"
+alias nvi="nvim"
 alias more=less
 alias l='ls -al'
 alias up='sudo pacman -Syyu --noconfirm'	# Update everything without asking permition
 alias dn='sudo pacman -S --noconfirm'		# Install package without asking permition
 alias mo="udisksctl mount -b"
 alias umo="udisksctl unmount -b"
+alias pkill="pkill -9"
+alias ping="ping -c 3 archlinux.org"
+alias listPackages="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 #alias moveracrypt="veracrypt /dev/sdx /mnt/veracrypt1/" # Mount encrypted Backup
 #alias umoveracrypt="veracrypt -d" # Unmount all veracrypt mounted devices
 alias luksCrypt="$HOME/.bash-scripts/luks.sh"
