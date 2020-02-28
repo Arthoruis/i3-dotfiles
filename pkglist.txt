@@ -10,13 +10,13 @@ gvfs-nfs
 opendesktop-fonts
 powerline-fonts
 ranger
-atools
+atool
 elinks
 ffmpegthumbnailer
 highlight
 mediainfo
 odt2txt
-perl-image-exiftools
+perl-image-exiftool
 poppler
 python-chardet
 w3m
