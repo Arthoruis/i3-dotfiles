@@ -1,7 +1,7 @@
 !General settingsr
 URxvt.geometry: 175x30
 URxvt.saveLines: 2000
-URxvt.scrollBar: true
+URxvt.scrollBar: false
 URxvt.scrollBar_right: true
 URxvt.scrollColor: #232c33
 URxvt.scrollstyle: rxvt
