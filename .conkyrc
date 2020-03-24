@@ -101,6 +101,8 @@ net_avg_samples 1
  
 # Force UTF8? note that UTF8 support required XFT
 override_utf8_locale yes
+
+#nvidia_display default
  
 TEXT
 ${color green}MÁQUINA: $nodename $machine ${hr 1}${color}
