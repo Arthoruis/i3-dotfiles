@@ -5,7 +5,6 @@ background yes
  
 # Font size?
 font Noto-Sans:size=6
-
  
 # Use Xft?
 use_xft yes
@@ -29,16 +28,16 @@ alignment top_right
  
 # Create own window instead of using desktop (required in nautilus)
 own_window yes
- 
-# If own_window is yes, you may use type normal, desktop or override
-own_window_type desktop 
- 
+
 # transparency with argb
 own_window_argb_visual yes
-
+ 
+# If own_window is yes, you may use type normal, desktop or override
+own_window_type desktop
+ 
 # Use pseudo transparency with own_window?
 own_window_transparent yes
-
+ 
 # If own_window_transparent is set to no, you can set the background color here
 own_window_colour black
  
@@ -71,9 +70,9 @@ draw_borders no
 draw_graph_borders yes
  
 # Default colors and also border colors
-default_color FDFDFD
-default_shade_color 000000
-default_outline_color 000000
+default_color white
+default_shade_color black
+default_outline_color black
  
 # Text alignment, other possible values are commented
 #alignment top_left
@@ -85,7 +84,7 @@ alignment top_right
 # Gap between borders of screen and text
 # same thing as passing -x at command line
 gap_x 10
-gap_y 30
+gap_y 40
  
 # Subtract file system buffers from used memory?
 no_buffers no
@@ -96,32 +95,25 @@ uppercase no
 # number of cpu samples to average
 # set to 1 to disable averaging
 cpu_avg_samples 4
- 
-# number of net samples to average
+
 # set to 1 to disable averaging
 net_avg_samples 1
  
 # Force UTF8? note that UTF8 support required XFT
 override_utf8_locale yes
-
-#nvidia_display default
  
 TEXT
-${color #00FF00}MÁQUINA: $nodename $machine ${hr 1}${color}
+${color green}MÁQUINA: $nodename $machine ${hr 1}${color}
 Tempo ativo: $alignr$uptime
-Kernel: $alignr${kernel version}
-MoBo: ${alignr}ASUSTek [P7H55]
+Kernel: $alignr${kernel version} 
 MoBo Temp: ${alignr}${hwmon 0 temp 2} °C
-
-${color green}TEMPO ${hr 1}${color}
-${exec $HOME/.config/conky/weather.sh}
-
+ 
 ${color green}NVIDIA: ${hr 1}${color}
 Placa: ${alignr}${exec nvidia-smi -q -a | grep -Eo 'GTX .+'}
 Driver: ${alignr}${exec nvidia-settings -q NvidiaDriverVersion -t | grep -m 1 ""}
 GPU Perf Level: ${alignr}${exec nvidia-smi | grep -Eo '...%.+?W' | awk '{print $3}'}
 GPU Temp/Max: ${alignr}${exec nvidia-smi | grep -Eo '...%.+?W' | awk '{print $2}'} / 94°C
-GPU Mem: ${alignr}${execi 10 nvidia-smi -q -d | grep "GPU" | grep "mem")} MHz
+#GPU Mem: ${alignr}${exec nvidia-smi -q -d | grep "GPU" | grep "mem")} MHz
 GPU Fan: ${alignr}${exec nvidia-smi | grep -Eo '...%.+?W' | awk '{print $1}'}
 Power use/max: ${alignr}${exec nvidia-smi | grep -Eo '...%.+?W' | awk '{print $4}'} / 120W
  
@@ -137,85 +129,60 @@ ${cpubar cpu2 4}${endif}${if_existing /sys/devices/system/cpu/cpu2}
 CPU3 ${alignr}${cpu cpu3}%
 ${cpubar cpu3 4}${endif}${if_existing /sys/devices/system/cpu/cpu3}
 CPU4 ${alignr}${cpu cpu4}%
-${cpubar cpu4 4}${endif}
+${cpubar cpu4 4}${endif}${if_existing /sys/devices/system/cpu/cpu4}
+CPU5 ${alignr}${cpu cpu5}%
+${cpubar cpu5 4}${endif}${if_existing /sys/devices/system/cpu/cpu5}
+CPU6 ${alignr}${cpu cpu6}%
+${cpubar cpu6 4}${endif}${if_existing /sys/devices/system/cpu/cpu6}
+CPU7 ${alignr}${cpu cpu7}%
+${cpubar cpu7 4}${endif}${if_existing /sys/devices/system/cpu/cpu7}
+CPU8 ${alignr}${cpu cpu8}%
+${cpubar cpu8 4}${endif}
 ${cpugraph 20}
 
-${color 00FF00}MEMÓRIA ${hr 1}${color}
+${color green}MEMÓRIA ${hr 1}${color}
 Ram ${alignr}$mem / $memmax ($memperc%)
 ${membar 4}
 Swap ${alignr}$swap / $swapmax ($swapperc%)
-${hr 1}
+${swapbar 4}
  
 USO CPU $alignr CPU% MEM%
 ${top name 1}$alignr${top cpu 1}${top mem 1}
 ${top name 2}$alignr${top cpu 2}${top mem 2}
 ${top name 3}$alignr${top cpu 3}${top mem 3}
 ${top name 4}$alignr${top cpu 3}${top mem 4}
-${top name 5}$alignr${top cpu 3}${top mem 5}
 
 USO MEM $alignr CPU% MEM%
 ${top_mem name 1}$alignr${top_mem cpu 1}${top_mem mem 1}
 ${top_mem name 2}$alignr${top_mem cpu 2}${top_mem mem 2}
 ${top_mem name 3}$alignr${top_mem cpu 3}${top_mem mem 3}
 ${top_mem name 4}$alignr${top_mem cpu 4}${top_mem mem 4}
-${top_mem name 5}$alignr${top_mem cpu 4}${top_mem mem 5}
- 
+
 ${color green}USO EM DISCO I/O ${hr 1}${color}
 Leitura: $alignr $diskio_read
 ${diskiograph_read 20,0 -t}
 Escrita: $alignr $diskio_write
 ${diskiograph_write 20,0 -t}
-
-${color green}ESPAÇO EM DISCO ${hr 1}${color}
-${if_mounted /boot}/boot ${alignr}${fs_used /boot} / ${fs_free /boot} / ${fs_size /boot}
+ 
+${color green}ESPAÇO EM DISCO ${hr 1}${color}${if_mounted /boot}
+/boot ${alignr}${fs_used /boot} / ${fs_free /boot} / ${fs_size /boot}
 ${fs_bar 4 /boot}${endif}${if_mounted /}
-/root ${alignr}${fs_used /} / ${fs_free /} / ${fs_size /}
-${fs_bar 4 /}${endif}${if_mounted /home}
-/home ${alignr}${fs_used /home} / ${fs_free /home} / ${fs_size /home}
-${fs_bar 4 /home}${endif}${if_mounted /run/media/arthorius/ARTHORIUS}
-Pendrive 16GB ${alignr}${fs_used /run/media/arthorius/ARTHORIUS} / ${fs_free /run/media/arthorius/ARTHORIUS} ${fs_size /run/media/arthorius/ARTHORIUS}
-${fs_bar 4 /run/media/arthorius/ARTHORIUS}${endif}${if_mounted /run/media/arthorius/Gaveta}
-Gaveta ${alignr}${fs_used /run/media/arthorius/Gaveta} / ${fs_free /run/media/arthorius/Gaveta} ${fs_size /run/media/arthorius/Gaveta}
-${fs_bar 4 /run/media/arthorius/Gaveta}${endif}${if_mounted /run/media/arthorius/ps4}
-HD Externo - ps4 ${alignr}${fs_used /run/media/arthorius/ps4} / ${fs_free /run/media/arthorius/ps4} / ${fs_size /run/media/arthorius/ps4}
-${fs_bar 4 /run/media/arthorius/ps4}${endif}${if_mounted /mnt/veracrypt1}
-HD Externo - Backup ${alignr}${fs_used /mnt/veracrypt1} / ${fs_free /mnt/veracryp1} / ${fs_size /mnt/veracrypt1}
-${fs_bar 4 /mnt/veracryp1}${endif}${if_mounted /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8}
-Backup - Luks ${alignr}${fs_used /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8} / ${fs_free /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8} / ${fs_size /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8}
-${fs_bar 4 /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8}${endif}
-
-${color green}CONEXÕES ${hr 1}${color}${if_existing /sys/class/net/enp2s0/operstate up}
-IP (enp2s0): ${addr enp2s0}:$alignr${exec curl -s www.icanhazip.com}
-Down: ${downspeed enp2s0}/s ${alignr}Up: ${upspeed enp2s0}/s
-${downspeedgraph enp2s0 20,90} ${alignr}${upspeedgraph enp2s0 20,90}
-Total: ${totaldown enp2s0} ${alignr}Total: ${totalup enp2s0}
-${hr 1}${endif}${if_existing /sys/class/net/wlp0s29u1u3/operstate up}
-IP (Wireless:)wlp0s29u1u3: ${addr wlan0}${alignr}{exec curl -s www.icanhazip.com}
-AP: ${wireless_essid wlan0} ${alignr}Bitrate: ${wireless_birate wlan0}
-Down: ${downspeed wlan0}/s ${alignr}Up: ${upspeed wlan0}/s
-${downspeedgraph wlan0 20,90} ${alignr}${upspeedgraph wlan0 20,90}
-Total: ${totaldown wlan0} ${alignr}Total: ${totalup wlan0}
-${hr 1}${endif}${if_existing /sys/class/net/eth0/operstate up}
-IP (Cabo: eth0):$alignr${addr eth0}
-Down: ${downspeed eth0}/s ${alignr}Up: ${upspeed eth0}/s
+/ ${alignr}${fs_used /} / ${fs_free /} / ${fs_size /}
+${fs_bar 4 /}${endif}${if_mounted /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8}
+Backup ${alignr}${fs_used /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8} / ${fs_free /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8} / ${fs_size /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8}
+${fs_bar 4 /run/media/arthorius/ebec9e15-4695-450e-b454-d8ab5c458bd8}${endif}$
+ 
+${color green}CONEXÕES ${hr 1}${color}
+${if_existing /sys/class/net/eth0/operstate up}IP (eth0):$alignr${addr eth0}
+Down: ${downspeed eth0} k/s ${alignr}Up: ${upspeed eth0} k/s
 ${downspeedgraph eth0 20,90} ${alignr}${upspeedgraph eth0 20,90}
 Total: ${totaldown eth0} ${alignr}Total: ${totalup eth0}
-${hr 1}${endif}${if_existing /sys/class/net/wlxaca2136452b3/operstate up}
-IP (Wifi: wlxaca2136452b3):$alignr${addr wlxaca2136452b3}
-AP: ${wireless_essid wlxaca2136452b3} ${alignr}Bitrate: ${wireless_bitrate wlxaca2136452b3}
-Down: ${downspeed wlxaca2136452b3}/s ${alignr}Up: ${upspeed wlxaca2136452b3}/s
-${downspeedgraph wlxaca2136452b3 20,90} ${alignr}${upspeedgraph wlxaca2136452b3 20,90}
-Total: ${totaldown wlxaca2136452b3} ${alignr}Total: ${totalup wlxaca2136452b3}
-${hr 1}${endif}${if_existing /sys/class/net/wlp0s29u1u4/operstate up}
-IP (Wifi: wlp0s29u1u4):$alignr${addr wlp0s29u1u4}
-AP: ${wireless_essid wlp0s29u1u4} ${alignr}Bitrate: ${wireless_bitrate wlp0s29u1u4}
-Down: ${downspeed wlp0s29u1u4}/s ${alignr}Up: ${upspeed wlp0s29u1u4}/s
-${downspeedgraph wlp0s29u1u4 20,90} ${alignr}${upspeedgraph wlp0s29u1u4 20,90}
-Total: ${totaldown wlp0s29u1u4} ${alignr}Total: ${totalup wlp0s29u1u4}
-${hr 1}${endif}${if_existing /sys/class/net/wlp0s29u1u5/operstate up}
-IP (Wifi: wlp0s29u1u5):$alignr${addr wlp0s29u1u5}
-AP: ${wireless_essid wlp0s29u1u5} ${alignr}Bitrate: ${wireless_bitrate wlp0s29u1u5}
-Down: ${downspeed wlp0s29u1u5}/s ${alignr}Up: ${upspeed wlp0s29u1u5}/s
-${downspeedgraph wlp0s29u1u5 20,90} ${alignr}${upspeedgraph wlp0s29u1u5 20,90}
-Total: ${totaldown wlp0s29u1u5} ${alignr}Total: ${totalup wlp0s29u1u5}
-${hr 1}${endif}
+${hr 1}${endif}${if_existing /sys/class/net/wlan0/operstate up}IP (wlan0):$alignr${addr wlan0}
+AP: ${wireless_essid wlan0} ${alignr}Bitrate: ${wireless_bitrate wlan0}
+Down: ${downspeed wlan0} k/s ${alignr}Up: ${upspeed wlan0} k/s
+${downspeedgraph wlan0 20,90} ${alignr}${upspeedgraph wlan0 20,90}
+Total: ${totaldown wlan0} ${alignr}Total: ${totalup wlan0}${endif}${if_existing /sys/class/net/wlan1/operstate up}IP (wlan1):$alignr${addr wlan1}
+AP: ${wireless_essid wlan1} ${alignr}Bitrate: ${wireless_bitrate wlan1}
+Down: ${downspeed wlan1} k/s ${alignr}Up: ${upspeed wlan1} k/s
+${downspeedgraph wlan1 20,90} ${alignr}${upspeedgraph wlan1 20,90}
+Total: ${totaldown wlan1} ${alignr}Total: ${totalup wlan1}${endif}
