@@ -81,7 +81,7 @@ gufw
 ufw-extras
 vlc
 youtube-dl
-yay
+dmenu
 xdotool
 xf86-input-synaptics 
 xorg 
