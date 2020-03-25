@@ -88,3 +88,9 @@ xorg
 xorg-server
 xorg-xinit
 xorg-drivers
+qemu
+qemu-arch-extra
+qemu-block-gluster
+qemu-block-iscsi
+qemu-block-rbd
+fzf
