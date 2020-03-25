@@ -67,4 +67,3 @@ exec $(get_session)
 exec xset b off		# Disable tab bell
 exec xset -dpms		# Disable turn off screen
 exec xset s off		# Disable turn off screen
-exec startx
