@@ -100,6 +100,7 @@ alias np='vim -w PKGBUILD'
 alias vi="vim"
 alias nvi="nvim"
 alias more=less
+alias ll='ls -l'
 alias l='ls -al'
 alias up='sudo pacman -Syyu --noconfirm'	# Update everything without asking permition
 alias dn='sudo pacman -S --noconfirm'		# Install package without asking permition
