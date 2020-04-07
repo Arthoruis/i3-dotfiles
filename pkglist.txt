@@ -19,6 +19,7 @@ odt2txt
 perl-image-exiftool
 poppler
 python-chardet
+nitrogen
 w3m
 terminus-font
 ttf-anonymous-pro
