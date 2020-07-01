@@ -58,23 +58,25 @@ set $mon "DVI-I-1"
 # Autostart applications
 exec --no-startup-id "setxkbmap -model pc104 -layout us,br , -option grp:alt_space_toggle"
 #exec --no-startup-id sleep 2; urxvt -e $HOME/.bash-scripts/luks+dropbox.sh
-exec --no-startup-id deadd-notification-center
 exec --no-startup-id sleep 2; urxvt
 exec --no-startup-id sleep 60; dropbox
+exec --no-startup-id sleep 60; pcloud
+exec --no-startup-id meteo
+exec --no-startup-id sleep 3; enpass -minimize
 exec --no-startup-id ulauncher
 exec --no-startup-id conky -q -c $HOME/.config/conky/conky.conf			# Conky i3 information
 exec --no-startup-id conky -q -c $HOME/.config/conky/conky2.conf		# Conky system information
-exec --no-startup-id sleep 1; compton -b					# Compton for transparency on terminal
+exec --no-startup-id sleep 1; picom -b					# Compton for transparency on terminal
 exec --no-startup-id nitrogen --restore						# Nitrogen for wallpapers
 exec --no-startup-id xset b off; alsactl restore				# Tab buzzer off
 exec --no-startup-id xset -dpms; xset s off					# Stop screen turn off
 exec --no-startup-id dunst							# Dunst for notification
 exec --no-startup-id volumeicon							# Volume icon tray
 exec --no-startup-id blueberry-tray						# Bluetooth tray
-exec --no-startup-id clipman							# Clipit for history copy/paste
+exec --no-startup-id clipit							# Clipit for history copy/paste
 exec --no-startup-id nm-applet							# Network Manager applet
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent				# Geoclue for Redshift
-#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 #exec --no-startup-id sbxkb							# Show keyboard current layout
 exec --no-startup-id pamac-tray	 						# Pamac update system if installed
@@ -95,11 +97,11 @@ bindsym $mod+F6         exec i3-sensible-terminal -e 'cmus'
 bindsym $mod+Ctrl+F6	exec i3-sensible-terminal -e 'pyradio'
 bindsym $mod+F7         exec pavucontrol
 bindsym $mod+Ctrl+F7	exec pulseeffects
-bindsym $mod+Ctrl+d	exec $HOME/Aplicativos/AppImage/Deezloader_Remix.AppImage
+bindsym $mod+Ctrl+d	exec $HOME/Aplicativos/AppImage/Deezloader*
 bindsym $mod+F8		exec i3-sensible-terminal -e 'pulsemixer'
 bindsym $mod+Ctrl+F8	exec i3-sensible-terminal -e 'alsamixer'
 bindsym $mod+F9         exec i3-sensible-terminal -e 'htop'
-bindsym $mod+Ctrl+e	exec enpass
+bindsym $mod+Ctrl+e	exec enpass -minimize
 bindsym $mod+t          exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t     exec --no-startup-id picom -b
 bindsym $mod+p		exec alsactl restore			# Restore audio
@@ -116,8 +118,11 @@ bindsym --release $mod+Print exec --no-startup-id "maim --hidecursor -s  $HOME/P
 # etc...
 
 assign [title="Firefox"] $ws2
-assign [class="spotify"] $ws3
+assign [title="New Tab - Brave"] $ws2
+#assign [title="qutebrowser"] $ws2
 assign [class="Clementine"] $ws3
+assign [title="Spotify Premium"] $ws3
+assign [title="Spotify"] $ws3
 #assign [class="whatsie"] $ws4
 assign [title="Rambox"] $ws4
 assign [title="Telegram"] $ws5
@@ -130,13 +135,15 @@ assign [title="MineTime"] $ws8
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Trnasfer*"] floating enable
+for_window [title="Ardour - Preferences"] floating enable
 #for_window [title="Calculator"] floating enable right border normal
+for_window [title="Ulauncher Preferences"] floating enable
 for_window [class="Gparted"] floating enable border normal
 for_window [class="Lxappearance"] floating enable border normal
 for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
-#for_window [class="Pale moon"] fullscreen enable
+for_window [class="Calculator"] floating enable 
 for_window [class="nitrogen"] fullscreen enable
 for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
@@ -277,8 +284,8 @@ bindsym $mod+F11			exec xbacklight -dec 10
 
 # change focus
 bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
+bindsym $mod+l focus down
+bindsym $mod+k focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:

@@ -1,0 +1,23 @@
+{
+    "com.github.nesivmi.ulauncher-translate": {
+        "id": "com.github.nesivmi.ulauncher-translate",
+        "url": "https://github.com/nesivmi/ulauncher-translate",
+        "updated_at": "2020-04-23T00:17:41.589105",
+        "last_commit": "9bf5513e57b37a3f68acce459f7c878e57e8a16d",
+        "last_commit_time": "2019-09-16T20:21:07"
+    },
+    "com.github.dhelmr.ulauncher-duckduckgo-bangs": {
+        "id": "com.github.dhelmr.ulauncher-duckduckgo-bangs",
+        "url": "https://github.com/dhelmr/ulauncher-duckduckgo-bangs",
+        "updated_at": "2020-04-23T00:23:35.165757",
+        "last_commit": "efb7b3e6545dedb4d626a085c0480eddc3dd4ed2",
+        "last_commit_time": "2020-02-15T22:17:26"
+    },
+    "com.github.rkarami.ulauncher-password-generator": {
+        "id": "com.github.rkarami.ulauncher-password-generator",
+        "url": "https://github.com/rkarami/ulauncher-password-generator",
+        "updated_at": "2020-04-23T00:24:39.077461",
+        "last_commit": "dd835041f81a0821e6398d3ab817847d93af615f",
+        "last_commit_time": "2019-09-27T21:34:17"
+    }
+}

@@ -2,34 +2,23 @@ command=~/.config/i3blocks/statusbar/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
-#[usb]
-#markup=pango
-#signal=1
-#interval=2
-
 [mediaplayer]
-instance=cmus
+instance=spotify
 interval=5
 signal=10
 
 [arch-update]
 interval=3600
 markup=pango
-#label=Updates:
 
-[calendar]
-label=📅
-interval=1
+[bandwidth2]
+interval=persist
 
 [kbdd_layout]
 interval=persist
 
+[calendar]
+interval=1
+
 [shutdown_menu]
 full_text=Quit
-#launcher=rofi
-#ROFI_TEXT=Menu
-#ROFI_OPTIONS=-width 11 -location 3 -hide-scrollbar -bw 2
-
-[battery]
-markup=pango
-interval=10
