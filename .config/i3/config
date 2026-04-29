@@ -64,7 +64,7 @@ exec --no-startup-id sleep 1; urxvt -e watch -n 1 lsblk -fmi
 exec --no-startup-id sleep 1; arch-update --tray
 exec --no-startup-id sleep 3; xfce4-clipman
 exec --no-startup-id sleep 3; enpass -minimize
-exec --no-startup-id ulauncher
+exec --no-startup-id bavarder
 exec --no-startup-id conky -q -c $HOME/.config/conky/conky.conf			# Conky i3 information
 exec --no-startup-id conky -q -c $HOME/.config/conky/conky2.conf		# Conky system information
 exec --no-startup-id sleep 1; picom -b					# Compton for transparency on terminal
@@ -74,7 +74,7 @@ exec --no-startup-id xset -dpms; xset s off					# Stop screen turn off
 exec --no-startup-id dunst							# Dunst for notification
 exec --no-startup-id pasystray							# Volume icon tray
 exec --no-startup-id blueman-applet						# Bluetooth tray
-exec --no-startup-id clipit							# Clipit for history copy/paste
+exec --no-startup-id parcellite							# Clipit for history copy/paste
 exec --no-startup-id nm-applet							# Network Manager applet
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent				# Geoclue for Redshift
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -109,6 +109,10 @@ bindsym $mod+Ctrl+t     exec --no-startup-id picom -b
 bindsym $mod+p		exec alsactl restore			# Restore audio
 bindsym $mod+Ctrl+p	exec sudo systemctl restart NetworkManager
 bindsym $mod+Ctrl+w	exec kill -s USR1 $(pidof deadd-notification-center)
+
+# IA - Bavarder (Flatpak)
+bindsym $mod+g exec --no-startup-id flatpak run io.github.Bavarder.Bavarder
+for_window [class="Bavarder"] floating enable, move position center
 
 # Screenshot
 bindsym --release Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/Screen-Capture/screenshot-$(date +%d-%m-%Y_%H-%M-%S).png"
