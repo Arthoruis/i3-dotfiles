@@ -116,6 +116,8 @@ alias qemu-usb-emulator="sudo qemu-system-x86_64 -machine accel=kvm:tcg -m 512 -
 alias virus="clamscan -ior --bell --log=$HOME/Clamscan/clamscan-log-$(date +%d-%m-%Y_%H-%M-%S).txt"
 alias virus-copy="clamscan -ior --bell --log=$HOME/Clamscan/clamscan-log-$(date +%d-%m-%Y_%H-%M-%S).txt --copy=$HOME/Clamscan/"
 alias virus-move="clamscan -ior --bell --log=$HOME/Clamscan/clamscan-log-$(date +%d-%m-%Y_%H-%M-%S).txt --move=$HOME/Clamscan/"
+alias teclado="setxkbmap -model pc104 -layout us,br , -option grp:alt_space_toggle"
+alias tiktok-downloader="yt-dlp --cookies-from-browser firefox "
 
 shopt -s autocd #Allows you to cd into direcotory merely by typing the directory name.
 

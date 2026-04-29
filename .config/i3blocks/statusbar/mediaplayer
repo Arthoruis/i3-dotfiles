@@ -1,156 +1,54 @@
-#!/usr/bin/env perl
-# Copyright (C) 2014 Tony Crisci <tony@dubstepdish.com>
-# Copyright (C) 2015 Thiago Perrotta <perrotta dot thiago at poli dot ufrj dot br>
+#!/usr/bin/env bash
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# Media player block using playerctl with auto-detection.
+# Supports: cmus, spotify, vlc, mpv, rhythmbox, and any MPRIS player.
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# If BLOCK_INSTANCE is set, use that as the exact player name.
+if [ -n "$BLOCK_INSTANCE" ]; then
+    PLAYER="$BLOCK_INSTANCE"
+else
+    # Auto-detect: list active players
+    players=$(playerctl -l 2>/dev/null | tr '\n' ' ')
+    # Priority list – can adjust order if you like
+    priority=(cmus spotify vlc mpv rhythmbox chromium firefox)
 
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    PLAYER=""
+    for p in "${priority[@]}"; do
+        if echo "$players" | grep -qw "$p"; then
+            PLAYER="$p"
+            break
+        fi
+    done
 
-# Requires playerctl binary to be in your path (except cmus)
-# See: https://github.com/acrisci/playerctl
+    # Fallback: if nothing from priority matched, use the first playerctl entry
+    if [ -z "$PLAYER" ] && [ -n "$players" ]; then
+        PLAYER=$(echo "$players" | awk '{print $1}')
+    fi
+fi
 
-# Set instance=NAME in the i3blocks configuration to specify a music player
-# (playerctl will attempt to connect to org.mpris.MediaPlayer2.[NAME] on your
-# DBus session).
+# If still no player, show nothing
+[ -z "$PLAYER" ] && exit 0
 
-use Time::HiRes qw(usleep);
-use Env qw(BLOCK_INSTANCE);
+artist=$(playerctl --player="$PLAYER" metadata artist 2>/dev/null)
+title=$(playerctl --player="$PLAYER" metadata title 2>/dev/null)
+status=$(playerctl --player="$PLAYER" status 2>/dev/null)
 
-use constant DELAY => 50; # Delay in ms to let network-based players (spotify) reflect new data.
-use constant SPOTIFY_STR => 'spotify';
+# No status or stopped -> show nothing
+if [ -z "$status" ] || [ "$status" = "Stopped" ]; then
+    exit 0
+fi
 
-my @metadata = ();
-my $player_arg = "";
+# Click actions
+case "$BLOCK_BUTTON" in
+    1) playerctl --player="$PLAYER" previous >/dev/null 2>&1 ;;
+    2) playerctl --player="$PLAYER" play-pause >/dev/null 2>&1 ;;
+    3) playerctl --player="$PLAYER" next >/dev/null 2>&1 ;;
+    4) playerctl --player="$PLAYER" volume 0.01+ >/dev/null 2>&1 ;;
+    5) playerctl --player="$PLAYER" volume 0.01- >/dev/null 2>&1 ;;
+esac
 
-if ($BLOCK_INSTANCE) {
-    $player_arg = "--player='$BLOCK_INSTANCE'";
-}
+text=""
+[ -n "$artist" ] && text="$artist"
+[ -n "$title" ] && text="${text:+$text - }$title"
 
-sub buttons {
-    my $method = shift;
-
-    if($method eq 'mpd') {
-        if ($ENV{'BLOCK_BUTTON'} == 1) {
-            system("mpc prev");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 2) {
-            system("mpc toggle");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 3) {
-            system("mpc next");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 4) {
-            system("mpc volume +10");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 5) {
-            system("mpc volume -10");
-        }
-    } elsif ($method eq 'cmus') {
-        if ($ENV{'BLOCK_BUTTON'} == 1) {
-            system("cmus-remote --prev");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 2) {
-            system("cmus-remote --pause");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 3) {
-            system("cmus-remote --next");
-        }
-    } elsif ($method eq 'playerctl') {
-        if ($ENV{'BLOCK_BUTTON'} == 1) {
-            system("playerctl $player_arg previous");
-            usleep(DELAY * 1000) if $BLOCK_INSTANCE eq SPOTIFY_STR;
-        } elsif ($ENV{'BLOCK_BUTTON'} == 2) {
-            system("playerctl $player_arg play-pause");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 3) {
-            system("playerctl $player_arg next");
-            usleep(DELAY * 1000) if $BLOCK_INSTANCE eq SPOTIFY_STR;
-        } elsif ($ENV{'BLOCK_BUTTON'} == 4) {
-            system("playerctl $player_arg volume 0.01+");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 5) {
-            system("playerctl $player_arg volume 0.01-");
-        }
-    } elsif ($method eq 'rhythmbox') {
-        if ($ENV{'BLOCK_BUTTON'} == 1) {
-            system("rhythmbox-client --previous");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 2) {
-            system("rhythmbox-client --play-pause");
-        } elsif ($ENV{'BLOCK_BUTTON'} == 3) {
-            system("rhythmbox-client --next");
-        }
-    }
-}
-
-sub cmus {
-    my @cmus = split /^/, qx(cmus-remote -Q);
-    if ($? == 0) {
-        foreach my $line (@cmus) {
-            my @data = split /\s/, $line;
-            if (shift @data eq 'tag') {
-                my $key = shift @data;
-                my $value = join ' ', @data;
-
-                @metadata[0] = $value if $key eq 'artist';
-                @metadata[1] = $value if $key eq 'title';
-            }
-        }
-
-        if (@metadata) {
-            buttons('cmus');
-
-            # metadata found so we are done
-            print(join ' - ', @metadata);
-            exit 0;
-        }
-    }
-}
-
-sub mpd {
-    my $data = qx(mpc current);
-    if (not $data eq '') {
-        buttons("mpd");
-        print($data);
-        exit 0;
-    }
-}
-
-sub playerctl {
-    buttons('playerctl');
-
-    my $artist = qx(playerctl $player_arg metadata artist);
-    chomp $artist;
-    # exit status will be nonzero when playerctl cannot find your player
-    exit(0) if $? || $artist eq '(null)';
-
-    push(@metadata, $artist) if $artist;
-
-    my $title = qx(playerctl $player_arg metadata title);
-    exit(0) if $? || $title eq '(null)';
-
-    push(@metadata, $title) if $title;
-
-    print(join(" - ", @metadata)) if @metadata;
-}
-
-sub rhythmbox {
-    buttons('rhythmbox');
-
-    my $data = qx(rhythmbox-client --print-playing --no-start);
-    print($data);
-}
-
-if ($player_arg eq '' or $player_arg =~ /mpd/) {
-    mpd;
-}
-elsif ($player_arg =~ /cmus/) {
-    cmus;
-}
-elsif ($player_arg =~ /rhythmbox/) {
-    rhythmbox;
-}
-else {
-    playerctl;
-}
-print("\n");
+echo "$text"

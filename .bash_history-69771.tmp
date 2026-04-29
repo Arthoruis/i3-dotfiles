@@ -1,0 +1,500 @@
+sudo pacman -S xfce4 xfce4-goodies
+sudo pacman -S i3gaps i3wm i3status
+pacman -sS i3
+sudo pacman -S i3-wm i3blocks i3losck i3-status conky
+sudo pacman -S i3-wm i3blocks i3lock i3-status conky
+sudo pacman -S i3-wm i3blocks i3lock i3status conky
+reboot
+inxi
+dn inxi
+inxi -G
+startxfce4 
+pacman -Sgg | grep xorg
+sudo pacman -S $(pacman -Sgg | grep xorg)
+sudo pacman -S $(pacman -Sgg | grep xorg) --noconfirm
+exit
+startxfce4 
+sudo -Rns $(pacman -Qnq | grep xorg)
+sudo pacman -Rns $(pacman -Qnq | grep xorg)
+sudo pacman -Rnds $(pacman -Qnq | grep xorg)
+sudo pacman -Rds $(pacman -Qnq | grep xorg)
+sudo pacman -Rdns $(pacman -Qnq | grep xorg)
+sudo pacman -Rdd $(pacman -Qnq | grep xorg)
+sudo pacman -S $(pacman -Sg | xorg)
+sudo pacman -S $(pacman -Sg | grep xorg)
+rm .local/share/xorg/
+ls
+l
+startxfce4 
+startx /usr/bin/startxfce4 
+vim .xinitrc 
+sudo pacman -S lxdm
+sudo systemctl enable lxdm
+reboot
+sudo systemctl disable lxdm
+reboot
+startxfce4 
+sudo pacman -S xorg-xinit
+startxfce4 
+rm .local/share/xorg/
+sudo pacman -Rdd $(pacman -Qnq | grep xorg)
+sudo pacman -S xorg-server
+sudo pacman -S xorg-xinit
+rm .Xauthority 
+l
+sudo pacman -S xorg-fonts
+sudo pacman -S xorg
+pacman -Qnq | xorg
+pacman -Qnq | grep org
+exit
+l
+startx
+sudo pacman -S urxvt
+sudo pacman -S rxvt-perls
+sudo pacman -S rxvt
+sudo pacman -S rxvt-unicode
+pacman -sS xrvt
+pacman -sS uxrvt
+exit
+sudo ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+sudo timedatectl set-ntp true
+dn firewall-applet
+dn bash-completion
+dn lxde-polkit
+dn lxqt-polkit
+yay polqit
+sudo pacman -S yay
+yay polkit
+s
+lsblk -fmi
+sudo pacman -Syyu
+pacman -Qil firewall-applet
+l
+startxfce4 
+reboot
+/usr/bin/firewall-applet 
+yay qt
+1 2
+startxfce4 
+xfce4-session-logout 
+reboot
+startxfce4 
+dn gnome-keyrings seahorse
+dn gnome-keyring seahorse
+xfce4-sel
+xfce4-sessionl
+xfce4-session-logout 
+reboot
+dn ttf-hack
+cd Downloads/Git/
+l
+git clone https://github.com/Arthoruis/Arch-Install
+git clone https://github.com/Arthoruis/arch-install
+git clone https://github.com/arthoruis/arch-install.git
+dn blueman-tray
+dn blueman
+dn pulseaudio-bluetooth
+pacman -Sgg | pulseaudio
+pacman -Sgg | grep pulseaudio
+pacman -Sg | grep pulseaudio
+db dnebu
+db dmenu
+dn dmenu
+blueman-tray 
+yay polkit-gnome
+yay gnome-keyring
+yay gsd-xsettings
+yay xsettings
+dn nitrogen
+yay nitrogen
+yay -S - < /home/Backup/pacman-qmq.txt 
+limpar
+yay -S - < /home/Backup/pacman-qmq.txt 
+yay -S - < /home/Backup/pacman-qmq.txt 
+dn speedtest
+dn speed-test
+yay speedtest
+dn speedtest++
+speedtest++ 
+sudo pacman -Rns xfce4 xfce4-goodies
+dn pcman-fm
+dn pcmanfm
+dn gvfs xarchives
+dn gvfs xarchiver
+dn arj cpio lha lrzip lzip lzop unarj unrar unzip zip
+l
+l Arquivos/
+l Downloads/
+l
+l AppImage/
+l /home/Backup/
+cp -rfv /home/Backup/pacman-q* Desktop/
+cp -rfv /home/Backup/Archlinux-Install-Luks+BTRFs+home.txt Desktop/
+rm /home/Backup/
+l
+l Downloads/
+l Documents/
+l
+l Music/
+dn cmus
+dn libao faad2 libmad libmp4v2 libmpcdec opusfile wavpack flac
+dn librewolf
+dn pulseaudio-alsa
+dn dn libavtp
+pulseaudio 
+sudo systemctl enable bluetooth
+i3-msg exit
+startx
+exit
+startx
+dn alsa
+yay alsa
+reboot
+dn pipewire
+gst-plugin-pipewire pipewire-audio pipewire-ffado pipewire-jack-client pipewire-jack pipewire-libcamera pipewire-pulse pipewire-roc pipewire-session-manager pipewire-v4l2 pipewire-x11-bell 
+sudo pacman -S gst-plugin-pipewire pipewire-audio pipewire-ffado pipewire-jack-client pipewire-jack pipewire-libcamera pipewire-pulse pipewire-roc pipewire-session-manager pipewire-v4l2 pipewire-x11-bell 
+sudo pacman -S gst-plugin-pipewire pipewire-audio pipewire-ffado pipewire-jack pipewire-libcamera pipewire-pulse pipewire-roc pipewire-session-manager pipewire-v4l2 pipewire-x11-bell 
+dn pulseaudio
+blueman-tray 
+dn alsa-utils alsa-firmware pulseaudio alsamixer alsa-lib
+dn alsa-utils alsa-firmware pulseaudio alsa-lib
+groups
+cat /etc/group
+:q
+q
+:q!
+exit
+cat /etc/group
+dn vlc
+lsblk -fmi
+startx
+exit
+aplay
+aplay -t
+sudo systemctl enable pulseaudio
+dn pulseaudio pulseaudio-alsa pavucontrol
+sudo systemctl enable pulseaudio
+sudo systemctl enable pulseaudio 
+dn alsa-firmware
+startx
+exit
+rm .config/cmus/
+watch -n 1 lsblk -fmi
+dn dunst
+cp -rfv Downloads/Git/i3-dotfiles/.config/dunst/ .config/
+firewall-applet 
+vim .config/i3/config 
+dn networkmanager-applet
+yay networkmanager-applet
+yay networkmanage
+dn nm-applet
+yay nm-applet
+dn nm-tray
+yay firewalld
+/usr/bin/firewall-applet 
+yay network-manager-applet
+sudo pacman -R nm-tray
+killall nm-tray
+yay qt6 qt5
+yay qt
+dn qt5
+yay jgmenu
+yay lxqt-polkit
+yay lxde-polkit
+yay lxde
+lxpolkit 
+killall lxpolkit
+lxpolkit 
+yay polkit gnome
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
+systemctl enable bluetooth
+systemctl start bluetooth
+systemctl enable pulseaudio
+sudo pacman -Ss pulseaudio
+dn pulseaudio=control
+dn pulseaudio-control
+startx
+exit
+startx
+groups
+usermod -aG polkit arthorius
+sudo usermod -aG polkit arthorius
+dn polkit
+pgrep -af polkit-gnome-au 
+lsblk -fmi
+dn bitwarden
+dn trash-cli
+shutdown now
+vim /usr/share/applications/arch-update-tray.desktop 
+vim /usr/bin/firewall-applet
+firewall-applet
+sudo chmod 750 /.snapshots/
+sudo chown :wheel /.snapshots
+sudo snapper -c root create --description "begining"
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo snapper -c root list
+sudo snapper -c root delete 1
+sudo snapper -c root list
+startx
+sudo pacman -Rns librewolf
+sudo pacman -S firefox
+dn xdg-desktop-portal 
+dn telegram-desktop
+vim .config/i3/config 
+dn bitwarden
+firewall-applet
+vim .config/i3/config 
+vim /usr/bin/firewall-applet 
+yay qt6
+dn qt6
+groups
+cat /etc/group | grep firewal
+cat /etc/group | grep fire
+dn nftables
+ya firewalld-gui
+yay firewalld-gui
+yay urxvt
+l
+cd Downloads/Git
+ls
+cd ~/Desktop/
+l
+git clone https://github.com/arthoruis/i3-dotfiles
+cd i3-dotfiles/
+l
+vim .Xdefaults 
+cd
+l
+vim .Xdefaults 
+vim .config/i3/config 
+dn weeve-terminal
+dn weever-terminal
+dn weevee-terminal
+yay weeve
+l
+l Desktop/
+dn zapzap
+limpar
+watch -n 1 lsblk -fmi
+dn snapper-gtk
+yay snapper
+yay snapper
+dn snapper-tools
+yay snapper
+dn gksu
+sudo snapper -c root list
+sudo sudo pacman -R snapper-gui-git snapper-tools
+yay snapper
+grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo snapper -c root list
+reboot
+watch -n 1 lsblk -fmi
+dn xorg-apps
+xkill 
+sudo pacman -Syyu
+sudo snapper -c root list
+startx
+groups
+ln /dev/null /etc/udev/rules.d/80-net-setup-link.rules
+ln -sf /dev/null /etc/udev/rules.d/80-net-setup-link.rules
+ip a
+sudo snapper -c root list
+sudo snapper -c root delete 3
+sudo snapper -c root delete 2
+sudo snapper -c root create --description "teste2"
+mount -a
+sud mount -a
+sudo mount -a
+lsblk -fmi
+l /
+dn snapper-support
+limpar
+yay ente-auth-bin
+sudo pacman -R $(pacman -Qdtq)
+sudo pacman -S steam
+mkdir Bottles
+l 
+dn qbittorrent
+rm .config/Bitwarden/
+find /home/arthorius/ -iname *bitwarden*
+dn qalculator
+yay qalculator-gtk
+yay qalculator
+yay alculator
+yay qalculate-gtk
+dn qalculate-gtk
+dn gnuplot
+rm .cache/yay/*
+lsblk -fmi
+dn scrcpy
+dn android-udev
+adb devices
+rm .android/
+adb devices
+lsblk -fmi
+l
+adb devices
+adb devices
+l
+scrcpy 
+lsblk -fmi
+l
+adb devices kill-server
+adb -h
+adb
+adb kill-server
+l
+adb devices
+l
+scrcpy 
+scrcpy
+adb devices
+scrcpy 
+adb kill-server
+scrcpy 
+adb devices
+scrcpy 
+killall ente
+killall ente-auth
+xkill
+lsblk -fmi
+yay
+sudo snapper -c root list
+reboot
+watch -n 1 lsblk -fmi
+sudo mkdir -p /etc/systemd/zram-generator.conf.d/
+cp /etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf.d/
+cd /etc/systemd/zram-generator.conf.d/
+l
+sudo cp /etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf.d/
+l
+l
+sudo vim zram-generatorconf
+l
+sudo vim zram-generator.conf
+sudo systemctl deamon-reexec
+sudo systemctl deamon-reload
+sudo systemctl /dev/zram0 
+sudo systemctl enable /dev/zram0 
+sudo su
+sudo pacman -Syu zram-generator
+sudo pacman -Syyu zram-generator
+sudo vim /etc/systemd/zram-generator.conf
+sudo vim /etc/default/grub
+sudo systemctl daemon-reload
+sudo systemctl start zram-swap.service
+dn zram-generator
+zramctl
+sudo systemctl enable zram-swap.service
+sudo pacman -Qil zram-generator
+sudo systemctl enable systemd-zram-setup.conf
+l /usr/lib/systemd/
+sudo systemctl enable zram
+ip a
+ln -sf /dev/null /etc/udev/rules.d/80-net-setup-link.rules
+sudo ln -sf /dev/null /etc/udev/rules.d/80-net-setup-link.rules
+startx
+sudo snapper -c root list
+vim .config/i3/conf
+vim .config/i3/config 
+yay zram
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+rm .cache/yay/*
+vim .config/i3blocks/statusbar/calendar 
+yay yad
+yay betterbird
+rm .cache/yay/*
+sudo snapper -c root list
+ip a
+vim .config/conky/conky2.conf 
+vim .config/conky/conky2.conf 
+reboot
+watch -n 1 lsblk -fmi
+journalctl 
+startx
+watch -n 1 lsblk -fmi
+firefox --help
+lsblk -fmi
+sudo mount /dev/sdc2 /mnt
+sudo vim /mnt/boot/grub/grub.cfg 
+startx
+l /mnt/
+l /mnt/.cache/
+su
+sudo su
+vim .config/i3/config 
+sudo vim /mnt/boot/grub/grub.cfg
+sudo vim /mnt/etc/default/grub
+reboot
+lsblk -fmi
+watch -n 1 lsblk -fmi
+sudo pacman -Syyy && yay --noconfirm
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+vim .bashrc
+startx
+adb devices
+sudo pacman -S neovim
+dn python-pynvim 
+neovim
+vim
+pacman -Qil neovim
+nvim 
+nvim .config/i3/config 
+yay nvim
+nvim .config/i3/config 
+vim .config/i3/config 
+dn warp
+dn warp-terminal
+sudo pacman -Rns warp
+dn warp
+yay localsend
+pacman -Qi pcman-fm
+pacman -Qi pcmanfm
+reboot
+watch -n 1 lsblk -fmi
+btop
+startx
+watch -n 1 lsblk -fmi
+vim .config/i3/config 
+vim .config/conky/conky2.conf
+vim .config/conky/conky2.conf
+vim .config/conky/conky2.conf
+yay davince
+yay resolve
+yay davinci
+teclado 
+dn avisynthplus intel-media-sdk ladspa
+dn devil
+cd Desktop/
+mkdir DaVinci-Resolve
+cd DaVinci-Resolve/
+cp -rfv ~/.cache/yay/davinci-resolve/* .
+l
+vi davinci-control-panels-setup.sh 
+im davinci-resolve.install 
+vim davinci-resolve.install 
+vim PKGBUILD 
+vim PKGBUILD 
+makepkg -g
+makepkg -G
+makepkg -h
+cp -rfv ~/Downloads/DaVinci_Resolve_20.3.2_Linux.zip .
+makepkg -g
+vim PKGBUILD 
+makepkg -s
+vim PKGBUILD 
+makepkg -s
+sudo pacman -U davinci-resolve-20.3.2-2-x86_64.pkg.tar.zst 
+dn darktable
+dn libwmf ghostscript opencv-samples vtk glew hdf5 cuda dcraw perl-image-exiftool poertmidi
+dn libwmf ghostscript opencv-samples vtk glew hdf5 cuda dcraw perl-image-exiftool portmidi
+yay -S cuda --asdeps
+[200~sudo pacman -S --asdeps --needed $(pacman -Si <package_name> | sed -n '/^Optional Deps/,/^Conflicts With/p' | sed '$d' | sed 's/^Optional Deps ://g' | sed 's/^\s*//g')
+sudo pacman -S --asdeps --needed $(pacman -Si cuda | sed -n '/^Optional Deps/,/^Conflicts With/p' | sed '$d' | sed 's/^Optional Deps ://g' | sed 's/^\s*//g')
+sudo pacman -S --asdeps --needed $(pacman -Si darktable | sed -n '/^Optional Deps/,/^Conflicts With/p' | sed '$d' | sed 's/^Optional Deps ://g' | sed 's/^\s*//g')
+mkdir Videos/davinci-resolve
+cd Videos/
+mv davinci-resolve/ Davinci-Resolve
+dn dcraw
+sudo snapper -c root list

@@ -1,17 +1,14 @@
 #!/bin/sh
-#
-# ~/.xinitrc
-#
-# Executed by startx (run your window manager from here)
+# ~/.xinitrc - generated for i3 on Arch Linux (user: arthorius)
+# Starts gnome-keyring in the session D-Bus and then execs i3
 
+# Load system and user X resources
 userresources=$HOME/.Xdefaults
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 DEFAULT_SESSION='i3 --shmlog-size 0'
-
-# merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
@@ -29,8 +26,7 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-# start some nice programs
-
+# Run scripts in /etc/X11/xinit/xinitrc.d
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
         [ -x "$f" ] && . "$f"
@@ -38,32 +34,20 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-get_session(){
-	local dbus_args=(--sh-syntax --exit-with-session)
-	case $1 in
-		awesome) dbus_args+=(awesome) ;;
-		bspwm) dbus_args+=(bspwm-session) ;;
-		budgie) dbus_args+=(budgie-desktop) ;;
-		cinnamon) dbus_args+=(cinnamon-session) ;;
-		deepin) dbus_args+=(startdde) ;;
-		enlightenment) dbus_args+=(enlightenment_start) ;;
-		fluxbox) dbus_args+=(startfluxbox) ;;
-		gnome) dbus_args+=(gnome-session) ;;
-		i3|i3wm) dbus_args+=(i3 --shmlog-size 0) ;;
-		jwm) dbus_args+=(jwm) ;;
-		kde) dbus_args+=(startkde) ;;
-		lxde) dbus_args+=(startlxde) ;;
-		lxqt) dbus_args+=(lxqt-session) ;;
-		mate) dbus_args+=(mate-session) ;;
-		xfce) dbus_args+=(xfce4-session) ;;
-		openbox) dbus_args+=(openbox-session) ;;
-		*) dbus_args+=($DEFAULT_SESSION) ;;
-	esac
+# Start gnome-keyring on the session D-Bus (important: start before i3)
+# This ensures org.freedesktop.secrets is registered on the correct DBus
+if command -v gnome-keyring-daemon >/dev/null 2>&1; then
+    eval "$(gnome-keyring-daemon --start --components=secrets,ssh,gpg)"
+    export SSH_AUTH_SOCK
+    export GPG_AGENT_INFO
+    export GNOME_KEYRING_CONTROL
+    export GNOME_KEYRING_PID
+fi
 
-	echo "dbus-launch ${dbus_args[*]}"
-}
+# Disable bell and power saving (keep these here; they run before exec)
+xset b off
+xset -dpms
+xset s off
 
-exec $(get_session)
-exec xset b off		# Disable tab bell
-exec xset -dpms		# Disable turn off screen
-exec xset s off		# Disable turn off screen
+# Start i3 without dbus-launch so it uses the same session DBUS
+exec i3 --shmlog-size 0

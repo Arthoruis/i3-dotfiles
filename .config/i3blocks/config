@@ -3,8 +3,8 @@ separator_block_width=15
 markup=pango
 
 [mediaplayer]
-instance=spotify
-interval=5
+instance=cmus
+interval=1
 signal=10
 
 [arch-update]
