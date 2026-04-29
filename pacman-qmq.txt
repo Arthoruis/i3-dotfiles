@@ -1,0 +1,15 @@
+davinci-resolve
+ente-auth-bin
+ente-auth-bin-debug
+furmark
+furmark-debug
+gputest
+gputest-debug
+python-asgi-lifespan
+python-httpx-sse
+python-sse-starlette
+qt5-3d
+qt5-3d-debug
+qt5-location
+qt5-location-debug
+snap-sync
